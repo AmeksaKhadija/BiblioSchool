@@ -1,8 +1,6 @@
 <?php
-
-include '../database/Connection.php';
+include './../database/connection.php';
 include('../models/CategorieModel.php');
-
 
 class categorieController
 {
@@ -19,30 +17,16 @@ class categorieController
     public function deleteCategory($categoryId)
     {
         $this->categorieModel->deleteCategory($categoryId);
-        header("Location: http://localhost:8080/breifs/BiblioSchool/views/adminCategories.php");
-        exit();
     }
 
     
-    public function addCategory()
+    public function addCategory($nom)
     {
-        if (isset($_POST['nom'])){
-            echo "test";
-            try {
-                $this->categorieModel->addCategory($nom);
-                header('location: http://localhost:8080/breifs/BiblioSchool/views/adminCategories.php');
-                exit();
-            } catch (PDOExeption $e) {
-                echo "erreur lors de l'ajout d'une categorie".$e->getMessage();
-            }
-        }
+        $this->categorieModel->addCategory($nom);
     }
 
-    public function editCategorie()
-    {
-        $id = $_POST['id'];
-        $nom =$_POST['nom'];
-        $this->categorieModel->editCategorie($nom, $id);
+    public function editCategorie($id, $nom) {
+        return $this->categorieModel->editCategorie($id, $nom);
     }
 
     public function getCategoryById($id)

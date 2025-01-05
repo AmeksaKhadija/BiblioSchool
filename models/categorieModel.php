@@ -1,6 +1,4 @@
 <?php
-require_once('../database/Connection.php');
-
 
 class CategorieModel
 {
@@ -9,7 +7,7 @@ class CategorieModel
 
     public function __construct($conn)
     {
-        $this->conn = (new Connection())->connect();
+        $this->conn = $conn;
     }
 
     public function setNom($nom)
@@ -30,7 +28,7 @@ class CategorieModel
 
     public function deleteCategory($categoryId)
     {
-        $req = "DELETE FROM categories WHERE id_categorie = :id";
+        $req = "DELETE FROM categories WHERE id = :id";
         $stmt = $this->conn->prepare($req);
         $stmt->bindParam(':id', $categoryId, PDO::PARAM_INT);
 
@@ -43,27 +41,25 @@ class CategorieModel
 
     public function addCategory($nom)
     {
-            $nom = $_POST['nom'];
-            // var_dump($nom);
+        try {
 
-            try {
-                $conn = (new Connection())->connect();
-
-                $query = "INSERT INTO categories(nom) VALUES(:nom)";
-                $stmt = $conn->prepare($query);
-                $stmt->bindParam(':nom', $nom);
-                $stmt->execute();
+            $query = "INSERT INTO categories(nom) VALUES(:nom)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':nom', $nom);
+            $stmt->execute();
                 
-            } catch (PDOException $e) {
-                echo "Error l'or de l'ajout d'une categorie: " . $e->getMessage();
-            }
+        } catch (PDOException $e) {
+            echo "Error l'ors de l'ajout d'une categorie: " . $e->getMessage();
+        }
     }
 
-    public function editCategorie($nom, $id){
+
+    public function editCategorie($id,$nom)
+    {
         $existingCategory = $this->getCategoryById($id);
     
         if ($existingCategory) {
-            echo "Editing existing category...";
+            // echo "Editing existing category...";
             $update_query = "UPDATE categories SET nom = :nom WHERE id = :id";
             $stmt = $this->conn->prepare($update_query);
             $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
@@ -80,11 +76,6 @@ class CategorieModel
             return false;
         }
     }
-    
-    
-
-// ...
-
 
     public function getCategoryById($categoryId)
     {
@@ -101,7 +92,7 @@ class CategorieModel
         }
     }
 
-
+//statistics
     public function getTotalCategories()
     {
         $query = "SELECT COUNT(*) as total_categories FROM categorie";

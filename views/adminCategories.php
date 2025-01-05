@@ -143,9 +143,9 @@ $categories = $categorieController->getAllCategories();
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="editCategorie.php?idcategorie=<?php echo $categorie['id']; ?>" class="btn btn-sm btn-neutral">Edit</a>
+                                        <a href="editCategorie.php?id=<?php echo $categorie['id']; ?>" class="btn btn-sm btn-neutral">Edit</a>
                                         <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i class="bi bi-trash"></i>
+                                            <a href="./../Helpers/categorieHelpers.php?id=<?php echo $categorie['id']; ?>"><i class="bi bi-trash"></i></a>
                                         </button>
                                     </td>
                                 </tr>
@@ -162,16 +162,16 @@ $categories = $categorieController->getAllCategories();
     </div>
 </div>
 
-<!-- button pour ajouter une categories -->
+<!-- modal pour ajouter une categories -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter contact</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter categorie</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method='POST' action="./adminCategories.php">
+                    <form method='POST' action="../Helpers/categorieHelpers.php">
                         <div class="mb-3">
                             <label for="nom" class="form-label">Nom</label>
                             <input type="text" class="form-control" name="nom" id="nom"
@@ -181,13 +181,12 @@ $categories = $categorieController->getAllCategories();
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" name="submit" class=" btn btn-dark">Ajouter Categorie</button>
                         </div>
-                        <div id="message" style="color: red;"></div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-  <script src="../assets/script.js"></script>
+  <script src="./../assets/script.js"></script>
 </body>
 </html>
