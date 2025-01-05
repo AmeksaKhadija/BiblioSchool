@@ -55,9 +55,10 @@ $categories = $categorieController->getAllCategories();
                             <i class="bi bi-house"></i> Dashboard
                         </a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="adminUser.php">
-                            <i class="bi bi-people"></i> Users
+                        <a class="nav-link" href="adminLivres.php">
+                        <i class="bi bi-file-text"></i> Livres
                         </a>
                     </li>
                     <li class="nav-item">
@@ -70,11 +71,9 @@ $categories = $categorieController->getAllCategories();
                         <i class="bi bi-person-square"></i> Tags
                         </a>
                     </li>
-                </ul>
-                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="adminLivres.php">
-                        <i class="bi bi-file-text"></i> Livres
+                        <a class="nav-link" href="adminUser.php">
+                            <i class="bi bi-people"></i> Users
                         </a>
                     </li>
                     <li class="nav-item">

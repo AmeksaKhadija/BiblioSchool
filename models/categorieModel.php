@@ -20,7 +20,6 @@ class CategorieModel
         $req = "SELECT * FROM categories";
         $stmt = $this->conn->query($req);
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         if (!empty($users)) {
             return $users;
         }

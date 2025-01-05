@@ -1,7 +1,9 @@
-<?php 
-require_once ('../Controllers/tagController.php');
-$tagController = new tagController();
-$tags = $tagController->getAllTags();
+<?php
+
+require_once ('../Controllers/livreController.php');
+$livreController = new livreController();
+$livres = $livreController->getAllLivres();
+
 ?>
 
 <!DOCTYPE html>
@@ -122,27 +124,41 @@ $tags = $tagController->getAllTags();
             <div class="container-fluid">                
                 <div class="card shadow border-0 mb-7">
                     <div class="table-responsive">
-                    <?php if (!empty($tags)): ?>
+                    <?php if (!empty($livres)): ?>
 
                         <table class="table table-hover table-nowrap">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Name</th>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">Date De Création</th>
+                                    <th scope="col">Categorie</th>
+                                    <th scope="col">Tag</th>
                                     <th scope="col">Actions</th>   
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($tags as $tag): ?>
+                            <?php foreach ($livres as $livre): ?>
                                 <tr>
                                     <td>
                                         <a class="text-heading font-semibold" href="#">
-                                        <?php echo $tag['nom']; ?>
+                                        <?php echo $livre['titre']; ?>
                                         </a>
                                     </td>
+                                    <td><a class="text-heading font-semibold" href="#">
+                                        <?php echo $livre['auteur']; ?>
+                                        </a></td>
+                                    <td><a class="text-heading font-semibold" href="#">
+                                        <?php echo $livre['date_creation']; ?>
+                                        </a></td>
+                                    <td><a class="text-heading font-semibold" href="#">
+                                        <?php echo $livre['id_categorie']; ?>
+                                        </a></td>
+                                    <td></td>
                                     <td>
-                                        <a href="editTag.php?id=<?php echo $tag['id']; ?>" class="btn btn-sm btn-neutral">Edit</a>
+                                        <a href="editCategorie.php?id=<?php echo $livre['id']; ?>" class="btn btn-sm btn-neutral">Edit</a>
                                         <button type="button" onclick="showSweetAlert()" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <a href="./../Helpers/tagHelpers.php?id=<?php echo $tag['id']; ?>"><i class="bi bi-trash"></i></a>
+                                            <a href="./../Helpers/categorieHelpers.php?id=<?php echo $livre['id']; ?>"><i class="bi bi-trash"></i></a>
                                         </button>
                                     </td>
                                 </tr>
@@ -150,7 +166,7 @@ $tags = $tagController->getAllTags();
                             </tbody>
                         </table>
                         <?php else: ?>
-                            <p>Aucun tags trouvé.</p>
+                            <p>Aucun livres trouvé.</p>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -164,11 +180,11 @@ $tags = $tagController->getAllTags();
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter Tags</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter categorie</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method='POST' action="../Helpers/tagHelpers.php">
+                    <form method='POST' action="../Helpers/categorieHelpers.php">
                         <div class="mb-3">
                             <label for="nom" class="form-label">Nom</label>
                             <input type="text" class="form-control" name="nom" id="nom"
@@ -176,7 +192,7 @@ $tags = $tagController->getAllTags();
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" name="submit" class=" btn btn-dark">Ajouter tags</button>
+                            <button type="submit" name="submit" class=" btn btn-dark">Ajouter Categorie</button>
                         </div>
                     </form>
                 </div>
